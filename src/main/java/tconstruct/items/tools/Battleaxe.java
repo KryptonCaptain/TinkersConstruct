@@ -21,7 +21,8 @@ import tconstruct.library.tools.*;
 import tconstruct.tools.TinkerTools;
 
 @Optional.InterfaceList({
-        @Optional.Interface(modid = "battlegear2", iface = "mods.battlegear2.api.weapons.IBattlegearWeapon")
+        @Optional.Interface(modid = "battlegear2", iface = "mods.battlegear2.api.weapons.IBattlegearWeapon"),
+        @Optional.Interface(modid = "ZeldaItemAPI", iface = "zeldaswordskills.api.item.ISword") 
 })
 public class Battleaxe extends AOEHarvestTool implements IBattlegearWeapon
 {

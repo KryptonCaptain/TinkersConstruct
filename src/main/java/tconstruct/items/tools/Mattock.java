@@ -1,16 +1,26 @@
 package tconstruct.items.tools;
 
 import java.util.List;
+
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import mods.battlegear2.api.PlayerEventChild;
+import mods.battlegear2.api.weapons.IBattlegearWeapon;
 import tconstruct.library.tools.*;
 import tconstruct.tools.TinkerTools;
 import tconstruct.util.config.PHConstruct;
 
-public class Mattock extends DualHarvestTool
+@Optional.InterfaceList({
+    @Optional.Interface(modid = "battlegear2", iface = "mods.battlegear2.api.weapons.IBattlegearWeapon")
+})
+
+public class Mattock extends DualHarvestTool implements IBattlegearWeapon
 {
     public Mattock()
     {
@@ -125,4 +135,51 @@ public class Mattock extends DualHarvestTool
         return true;
     }
 
+    /*---- Battlegear Support START ----*/
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean sheatheOnBack(ItemStack item)
+    {
+        return true;
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean isOffhandHandDual(ItemStack off) {
+        return true;
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean offhandAttackEntity(PlayerEventChild.OffhandAttackEvent event, ItemStack mainhandItem, ItemStack offhandItem) {
+        return true;
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean offhandClickAir(PlayerInteractEvent event, ItemStack mainhandItem, ItemStack offhandItem) {
+        return true;
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean offhandClickBlock(PlayerInteractEvent event, ItemStack mainhandItem, ItemStack offhandItem) {
+        return true;
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public void performPassiveEffects(Side effectiveSide, ItemStack mainhandItem, ItemStack offhandItem) {
+        // unused
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean allowOffhand(ItemStack mainhand, ItemStack offhand) {
+    	return true;
+    }
+
+    /*---- Battlegear Support END ----*/
+    
 }

@@ -1,10 +1,20 @@
 package tconstruct.items.tools;
 
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import mods.battlegear2.api.PlayerEventChild;
+import mods.battlegear2.api.weapons.IBattlegearWeapon;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import tconstruct.library.tools.Weapon;
 import tconstruct.tools.TinkerTools;
 
-public class Cutlass extends Weapon
+@Optional.InterfaceList({
+    @Optional.Interface(modid = "battlegear2", iface = "mods.battlegear2.api.weapons.IBattlegearWeapon")
+})
+
+public class Cutlass extends Weapon implements IBattlegearWeapon
 {
     public Cutlass()
     {
@@ -59,4 +69,52 @@ public class Cutlass extends Weapon
     {
         return 1;
     }
+    
+    /*---- Battlegear Support START ----*/
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean sheatheOnBack(ItemStack item)
+    {
+        return false;
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean isOffhandHandDual(ItemStack off) {
+        return true;
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean offhandAttackEntity(PlayerEventChild.OffhandAttackEvent event, ItemStack mainhandItem, ItemStack offhandItem) {
+        return true;
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean offhandClickAir(PlayerInteractEvent event, ItemStack mainhandItem, ItemStack offhandItem) {
+        return true;
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean offhandClickBlock(PlayerInteractEvent event, ItemStack mainhandItem, ItemStack offhandItem) {
+        return true;
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public void performPassiveEffects(Side effectiveSide, ItemStack mainhandItem, ItemStack offhandItem) {
+        // unused
+    }
+
+    @Override
+    @Optional.Method(modid = "battlegear2")
+    public boolean allowOffhand(ItemStack mainhand, ItemStack offhand) {
+    	return true;
+    }
+
+    /*---- Battlegear Support END ----*/
+    
 }

@@ -21,8 +21,7 @@ import tconstruct.library.tools.*;
 import tconstruct.tools.TinkerTools;
 
 @Optional.InterfaceList({
-        @Optional.Interface(modid = "battlegear2", iface = "mods.battlegear2.api.weapons.IBattlegearWeapon"),
-        @Optional.Interface(modid = "ZeldaItemAPI", iface = "zeldaswordskills.api.item.ISword")
+        @Optional.Interface(modid = "battlegear2", iface = "mods.battlegear2.api.weapons.IBattlegearWeapon")
 })
 public class Battleaxe extends AOEHarvestTool implements IBattlegearWeapon
 {
@@ -247,7 +246,7 @@ public class Battleaxe extends AOEHarvestTool implements IBattlegearWeapon
     @Override
     @Optional.Method(modid = "battlegear2")
     public boolean isOffhandHandDual(ItemStack off) {
-        return true;
+        return false;
     }
 
     @Override
@@ -277,11 +276,7 @@ public class Battleaxe extends AOEHarvestTool implements IBattlegearWeapon
     @Override
     @Optional.Method(modid = "battlegear2")
     public boolean allowOffhand(ItemStack mainhand, ItemStack offhand) {
-        if(offhand == null)
-            return true;
-
-        return (mainhand != null && mainhand.getItem() != TinkerTools.cleaver && mainhand.getItem() != TinkerTools.battleaxe)
-                && (offhand.getItem() != TinkerTools.cleaver && offhand.getItem() != TinkerTools.battleaxe);
+        return true;
     }
 
     /*---- Battlegear Support END ----*/

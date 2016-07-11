@@ -144,13 +144,13 @@ public abstract class Weapon extends ToolCore implements IBattlegearWeapon, zeld
     @Optional.Method(modid = "battlegear2")
     public boolean sheatheOnBack(ItemStack item)
     {
-        return true;
+        return false;
     }
 
     @Override
     @Optional.Method(modid = "battlegear2")
     public boolean isOffhandHandDual(ItemStack off) {
-        return true;
+        return false;
     }
 
     @Override

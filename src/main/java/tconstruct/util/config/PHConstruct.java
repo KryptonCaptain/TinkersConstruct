@@ -212,6 +212,11 @@ public class PHConstruct
         extraBlockUpdates = config.get("Experimental", "Send additional block updates when using AOE tools", true,"This fixes very fast tools sometimes resulting in ghost blocks, but causes a bit more network traffic. Should be fine in theory.").getBoolean(true);
         heartDropBlacklist = config.get("Experimental", "YellowHeartDropBlacklist", new String[] {"entitynpc", "entitycustomnpc"}, "Entity classes listed here will not drop yellow hearts. The values are the actual class names in lowercase.").getStringList();
 
+        
+        //IMC
+        mystcraftBlacklist = config.get("IMC", "Blacklists certain Mystcraft pages from being created", true).getBoolean(true);
+
+        
         /* Save the configuration file only if it has changed */
         if (config.hasChanged())
             config.save();
@@ -392,4 +397,7 @@ public class PHConstruct
     public static boolean minimalTextures;
     public static boolean extraBlockUpdates;
     public static String[] heartDropBlacklist;
+    
+    //IMC
+    public static boolean mystcraftBlacklist;
 }

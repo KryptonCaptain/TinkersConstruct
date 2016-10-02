@@ -83,15 +83,15 @@ task buildInfo {
         ext.revision = "GITBORK"
     }
 
-    if (System.getenv().BUILD_NUMBER != null) {
-        ext.buildNum = "build${System.getenv().BUILD_NUMBER}"
-    } else {
-        ext.buildNum = "DEV.${project.buildInfo.revision}"
-    }
+    //if (System.getenv().BUILD_NUMBER != null) {
+    //    ext.buildNum = "build${System.getenv().BUILD_NUMBER}"
+    //} else {
+    //    ext.buildNum = ""
+    //}
 }
 ext.artifact_version = 'NFG'
 if (System.getenv().ARTIFACT_VERSION == null) {
-    artifact_version = "${config.mod_version}.${project.buildInfo.buildNum}"
+    artifact_version = "${config.mod_version}"
 }
 if (System.getenv().ARTIFACT_VERSION != null) {
     artifact_version = "${system.getenv().ARTIFACT_VERSION}"

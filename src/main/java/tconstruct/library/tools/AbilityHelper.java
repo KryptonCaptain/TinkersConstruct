@@ -53,10 +53,10 @@ public class AbilityHelper
 
     public static boolean onLeftClickEntity (ItemStack stack, EntityLivingBase player, Entity entity, ToolCore tool)
     {
-        return onLeftClickEntity(stack, player, entity, tool, 0);
+        return onLeftClickEntity(stack, player, entity, tool, 1);
     }
 
-    public static boolean onLeftClickEntity (ItemStack stack, EntityLivingBase player, Entity entity, ToolCore tool, int baseDamage)
+    public static boolean onLeftClickEntity (ItemStack stack, EntityLivingBase player, Entity entity, ToolCore tool, double damageFactor)
     {
         if (entity.canAttackWithItem() && stack.hasTagCompound())
         {
@@ -71,8 +71,8 @@ public class AbilityHelper
 
                 float stoneboundDamage = (float) Math.log(durability / 72f + 1) * -2 * stonebound;
 
-                int damage = calcDamage(player, entity, stack, tool, toolTags, baseDamage);
-                float knockback = calcKnockback(player, entity, stack, tool, toolTags, baseDamage);
+                int damage = calcDamage(player, entity, stack, tool, toolTags, damageFactor);
+                float knockback = calcKnockback(player, entity, stack, tool, toolTags);
 
                 float enchantDamage = 0;
 
@@ -106,10 +106,7 @@ public class AbilityHelper
 
                     if (broken)
                     {
-                        if (baseDamage > 0)
-                            damage = baseDamage;
-                        else
-                            damage = 1;
+                        damage = 1;
                     }
                     boolean causedDamage = false;
                     boolean isAlive = entity.isEntityAlive();
@@ -210,11 +207,11 @@ public class AbilityHelper
         return false;
     }
 
-    public static int calcDamage(Entity user, Entity entity, ItemStack stack, ToolCore tool, NBTTagCompound toolTags, int baseDamage)
+    public static int calcDamage(Entity user, Entity entity, ItemStack stack, ToolCore tool, NBTTagCompound toolTags, double damageFactor)
     {
         EntityLivingBase living = user instanceof EntityLivingBase ? (EntityLivingBase)user : null;
 
-        int damage = toolTags.getInteger("Attack") + baseDamage;
+        int damage = toolTags.getInteger("Attack");
         int earlyModDamage = 0;
         for (ActiveToolMod mod : TConstructRegistry.activeModifiers)
         {
@@ -252,10 +249,12 @@ public class AbilityHelper
         }
         damage += modDamage;
 
+        damage *= damageFactor;
+
         return damage;
     }
 
-    public static float calcKnockback(Entity user, Entity entity, ItemStack stack, ToolCore tool, NBTTagCompound toolTags, int baseDamage)
+    public static float calcKnockback(Entity user, Entity entity, ItemStack stack, ToolCore tool, NBTTagCompound toolTags)
     {
         if(user == null) return 0;
         float knockback = 0;

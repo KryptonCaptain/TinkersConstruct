@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import tconstruct.items.tools.Dagger;
 import tconstruct.library.entity.ProjectileBase;
 import tconstruct.library.tools.*;
+import tconstruct.util.config.PHConstruct;
 
 public class DaggerEntity extends ProjectileBase
 {
@@ -49,8 +50,8 @@ public class DaggerEntity extends ProjectileBase
 
     @Override
     public void onHitEntity(MovingObjectPosition movingobjectposition) {
-        AbilityHelper.onLeftClickEntity(returnStack, (EntityPlayer)shootingEntity, movingobjectposition.entityHit, (ToolCore)returnStack.getItem());
-        //super.onHitEntity(movingobjectposition);
+        AbilityHelper.onLeftClickEntity(returnStack, (EntityPlayer)shootingEntity, movingobjectposition.entityHit,
+                (ToolCore)returnStack.getItem(), PHConstruct.daggerThrowMultiplier);
     }
 
     @Override

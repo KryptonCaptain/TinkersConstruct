@@ -7,6 +7,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkCheckHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -14,9 +15,12 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import mantle.pulsar.config.ForgeCFG;
 import mantle.pulsar.control.PulseManager;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -69,7 +73,7 @@ import java.util.Random;
  * @author mDiyo
  */
 
-@Mod(modid = "TConstruct", name = "TConstruct", version = "${version}",
+@Mod(modid = "TConstruct", name = "TConstruct", version = TConstruct.modVersion,
         dependencies = "required-after:Forge@[10.13.3.1384,11.14);" +
                 "required-after:Mantle@[1.7.10-0.3.2,);" +
                 "after:MineFactoryReloaded@[1.7.10R2.8.0RC7,);" +
@@ -86,7 +90,7 @@ import java.util.Random;
                 "before:UndergroundBiomes")
 public class TConstruct
 {
-    public static final String modVersion = "${version}";
+    public static final String modVersion = "1.7.10-1.8.8.build988";
     /** The value of one ingot in millibuckets */
     public static final int ingotLiquidValue = 144;
     public static final int oreLiquidValue = ingotLiquidValue * 2;

@@ -15,6 +15,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.*;
 import tconstruct.library.accessory.IHealthAccessory;
+import tconstruct.util.config.PHConstruct;
 
 public class ArmorExtended implements IInventory
 {
@@ -240,9 +241,11 @@ public class ArmorExtended implements IInventory
 
     public void dropItems ()
     {
+        final int dropEndSlot = PHConstruct.dropCanisters ? 7 : 4;
+
         EntityPlayer player = parent.get();
 
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < dropEndSlot; ++i)
         {
             if (this.inventory[i] != null)
             {

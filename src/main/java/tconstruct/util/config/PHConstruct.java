@@ -41,8 +41,8 @@ public class PHConstruct
 
         superfunWorld = config.get("Superfun", "All the world is Superfun", false).getBoolean(false);
 
-        keepHunger = config.get("Difficulty Changes", "Keep hunger on death", true).getBoolean(true);
-        keepLevels = config.get("Difficulty Changes", "Keep levels on death", true).getBoolean(true);
+        keepHunger = config.get("Difficulty Changes", "Keep hunger on death", false).getBoolean(false);
+        keepLevels = config.get("Difficulty Changes", "Keep levels on death", false).getBoolean(false);
         beginnerBook = config.get("Difficulty Changes", "Spawn beginner book", true).getBoolean(true);
         deathPenality = config.get("Difficulty Changes", "Tools lose 10% durability on death", true).getBoolean(true);
         balancedFluxModifier = config.get("Difficulty Changes", "Balanced Flux Modifier", true).getBoolean(true);
@@ -66,6 +66,9 @@ public class PHConstruct
         denyMattock = config.get("Difficulty Changes", "Deny creation of non-metal mattocks", false).getBoolean(false);
         craftEndstone = config.get("Difficulty Changes", "Allow creation of endstone", true).getBoolean(true);
         alternativeBoltRecipe = config.get("Difficulty Changes", "Add alternative recipe for bolt parts: arrowhead + toolrod in a crafting grid", false).getBoolean(false);
+        indestructible = config.get("Difficulty Changes", "Dropped tools are indestructible", false).getBoolean(false);
+        dropCanisters = config.get("Difficulty Changes", "Drop heart canisters on death", true).getBoolean(true);
+        daggerThrowMultiplier = config.get("Difficulty Changes", "Thrown dagger output multiplier", 3).getDouble(3);
 
         naturalSlimeSpawn = config.get("Mobs", "Blue Slime spawn chance", 1, "Set to 0 to disable").getInt(1);
 
@@ -119,14 +122,14 @@ public class PHConstruct
         generateTinSurface = config.get("Worldgen Disabler", "Generate Surface Tin", true).getBoolean(true);
         generateAluminumSurface = config.get("Worldgen Disabler", "Generate Surface Aluminum", true).getBoolean(true);
 
-        generateIronBush = config.get("Worldgen Disabler", "Generate Iron Bushes", true).getBoolean(true);
-        generateGoldBush = config.get("Worldgen Disabler", "Generate Gold Bushes", true).getBoolean(true);
-        generateCopperBush = config.get("Worldgen Disabler", "Generate Copper Bushes", true).getBoolean(true);
-        generateTinBush = config.get("Worldgen Disabler", "Generate Tin Bushes", true).getBoolean(true);
-        generateAluminumBush = config.get("Worldgen Disabler", "Generate Aluminum Bushes", true).getBoolean(true);
-        generateEssenceBush = config.get("Worldgen Disabler", "Generate Essence Bushes", true).getBoolean(true);
+        generateIronBush = config.get("Worldgen Disabler", "Generate Iron Bushes", false).getBoolean(false);
+        generateGoldBush = config.get("Worldgen Disabler", "Generate Gold Bushes", false).getBoolean(false);
+        generateCopperBush = config.get("Worldgen Disabler", "Generate Copper Bushes", false).getBoolean(false);
+        generateTinBush = config.get("Worldgen Disabler", "Generate Tin Bushes", false).getBoolean(false);
+        generateAluminumBush = config.get("Worldgen Disabler", "Generate Aluminum Bushes", false).getBoolean(false);
+        generateEssenceBush = config.get("Worldgen Disabler", "Generate Essence Bushes", false).getBoolean(false);
         addToVillages = config.get("Worldgen Disabler", "Add Village Generation", true).getBoolean(true);
-        allowVillagerTrading = config.get("Worldgen Disabler", "Enable the Tinkers Villager to trade for oreberries", true).getBoolean(true);
+        allowVillagerTrading = config.get("Worldgen Disabler", "Enable the Tinkers Villager to trade for oreberries", false).getBoolean(false);
 
         copperuDensity = config.get("Worldgen", "Copper Underground Density", 2, "Density: Chances per chunk").getInt(2);
         tinuDensity = config.get("Worldgen", "Tin Underground Density", 2).getInt(2);
@@ -190,7 +193,7 @@ public class PHConstruct
         AbilityHelper.necroticUHS = config.get("Ultra Hardcore Changes", "Necrotic modifier only heals on hostile mob kills", false).getBoolean(false);
 
         // Slime pools
-        islandRarity = config.get("Worldgen", "Slime Island Rarity", 1450).getInt(1450);
+        islandRarity = config.get("Worldgen", "Slime Island Rarity", 3000).getInt(3000);
 
         // Looks
         Property conTexMode = config.get("Looks", "Connected Textures Enabled", true);
@@ -351,6 +354,9 @@ public class PHConstruct
     public static boolean miningLevelIncrease;
     public static boolean denyMattock;
     public static boolean alternativeBoltRecipe;
+    public static boolean indestructible;
+    public static boolean dropCanisters;
+    public static double daggerThrowMultiplier;
 
     // Smeltery Output Modification
     public static double ingotsPerOre;

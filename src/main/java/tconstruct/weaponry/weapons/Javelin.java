@@ -24,7 +24,7 @@ public class Javelin extends AmmoWeapon {
     public boolean onLeftClickEntity (ItemStack stack, EntityPlayer player, Entity entity)
     {
         // javelin is the only throwing/ammo weapon that hurts on leftclicking
-        return AbilityHelper.onLeftClickEntity(stack, player, entity, this, 0);
+        return AbilityHelper.onLeftClickEntity(stack, player, entity, this);
     }
 
     @Override

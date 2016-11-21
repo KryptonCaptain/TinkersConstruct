@@ -308,7 +308,7 @@ public class TActiveOmniMod extends ActiveToolMod
     @Override
     public boolean doesCriticalHit (ToolCore tool, NBTTagCompound tags, NBTTagCompound toolTags, ItemStack stack, EntityLivingBase player, Entity entity)
     {
-        if (tool == TinkerTools.cutlass && random.nextInt(10) == 0)
+        if (tool == TinkerTools.cutlass && random.nextInt(4) == 0)
             return true;
         return false;
     }

@@ -7,6 +7,8 @@ import io.netty.buffer.ByteBuf;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.*;
+
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.*;
 import net.minecraft.entity.item.EntityItem;
@@ -239,6 +241,41 @@ public class ArmorExtended implements IInventory
         }
     }
 
+
+// --- EnderIO SoulBound enchant support
+
+    private static int soulBoundID = -6;
+
+    public static int getSoulBoundID() {
+        if (soulBoundID == -6) setSoulBoundID();
+        return soulBoundID;
+    }
+
+    private static void setSoulBoundID() {
+        for (Enchantment ench : Enchantment.enchantmentsList) {
+            if (ench != null && ench.getName().equals("enchantment.enderio.soulBound")) {
+                soulBoundID = ench.effectId;
+                return;
+            }
+        }
+        soulBoundID = -1;
+    }
+
+    public static boolean isSoulBounded(ItemStack stack) {
+        int soulBound = getSoulBoundID();
+        NBTTagList stackEnch = stack.getEnchantmentTagList();
+        if (soulBound >= 0 && stackEnch != null) {
+            for (int i = 0; i < stackEnch.tagCount(); i++) {
+                int id = stackEnch.getCompoundTagAt(i).getInteger("id");
+                if (id == soulBound) return true;
+            }
+        }
+        return false;
+    }
+
+// ---
+
+    
     public void dropItems ()
     {
         final int dropEndSlot = PHConstruct.dropCanisters ? 7 : 4;
@@ -247,7 +284,7 @@ public class ArmorExtended implements IInventory
 
         for (int i = 0; i < dropEndSlot; ++i)
         {
-            if (this.inventory[i] != null)
+            if (this.inventory[i] != null && !isSoulBounded(this.inventory[i]))
             {
                 player.func_146097_a(this.inventory[i], true, false);
                 this.inventory[i] = null;
